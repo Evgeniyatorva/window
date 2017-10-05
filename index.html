@@ -260,11 +260,11 @@
 				</div>
 				<div class="row">
 					<div class="application col-xs-12 wow rollIn" data-wow-delay="0.2s" data-wow-duration="1.5s" data-wow-offset="50">
-						<form action="#" method="post" id="form">
+						<form method="post" id="form1">
 							<h4>Оставьте вашу заявку и наш менеджер свяжется с Вами:</h4>
-							<input type="text" name="name" value="" placeholder="Ваше имя">
-							<input type="text" name="name" value="" placeholder="Ваша фамилия">
-							<input type="text" name="phone" value="" placeholder="Ваш номер телефона">
+							<input type="text" name="name" placeholder="Ваше имя" required>
+							<input type="text" name="surname" placeholder="Ваша фамилия">
+							<input type="tel" name="phone" placeholder="Ваш номер телефона" required>
 							<input type="submit" name="submit" value="Заказать">
 						</form>
 					</div>
@@ -297,11 +297,11 @@
 	<div class="popup">
 		<a href="#" class="close">X</a>
 		<div class="application col-xs-12">
-			<form action="#" method="post" id="form">
+			<form method="post" id="form">
 				<h4>Оставьте вашу заявку и наш менеджер свяжется с Вами:</h4>
-				<input type="text" name="name" value="" placeholder="Ваше имя">
-				<input type="text" name="name" value="" placeholder="Ваша фамилия">
-				<input type="text" name="phone" value="" placeholder="Ваш номер телефона">
+				<input type="text" name="name" placeholder="Ваше имя" required>
+				<input type="text" name="surname" placeholder="Ваша фамилия">
+				<input type="tel" name="phone" placeholder="Ваш номер телефона" required>
 				<input type="submit" name="submit" value="Заказать">
 			</form>
 		</div>
@@ -313,6 +313,20 @@
 	<script src="js/wow.min.js"></script>
 	<script>
 		new WOW().init();
+	</script>
+	<script>
+		$("#form1").submit(function() {
+		$.ajax({
+			type: "POST",
+			url: "mail.php",
+			data: $(this).serialize()
+		}).done(function() {
+			$(this).find("input").val("");
+			alert("Спасибо за заявку! Скоро мы с вами свяжемся.");
+			$("#form").trigger("reset");
+		});
+		return false;
+	});
 	</script>
 	<script>
    		$('.mobile_menu_click').click(function(){
